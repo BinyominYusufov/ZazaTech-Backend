@@ -1,0 +1,21 @@
+# Sync stack — no aiosqlite / greenlet.
+# Unpinned on purpose: lets pip resolve the latest releases, which ship
+# prebuilt cp314 wheels, so `pip install` needs no C++/Rust toolchain.
+
+fastapi
+uvicorn[standard]
+
+sqlmodel
+sqlalchemy
+
+# Imported by app/core/config.py — required even though it was not in the
+# hand-written list, otherwise the app fails to start (ModuleNotFoundError).
+pydantic-settings
+
+python-jose[cryptography]
+bcrypt
+
+python-multipart
+python-dotenv
+python-slugify
+aiofiles
