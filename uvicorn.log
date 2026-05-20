@@ -1,32 +1,42 @@
-INFO:     Started server process [16184]
+INFO:     Started server process [13984]
 INFO:     Waiting for application startup.
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine :: BEGIN (implicit)
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("blogs")
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("blogs")
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine [raw sql] ()
-2026-05-15 18:34:21,454 INFO sqlalchemy.engine.Engine :: [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("contacts")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("contacts")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("projects")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("projects")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("services")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("services")
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine [raw sql] ()
-2026-05-15 18:34:21,455 INFO sqlalchemy.engine.Engine :: [raw sql] ()
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("users")
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine [raw sql] ()
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine :: [raw sql] ()
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine COMMIT
-2026-05-15 18:34:21,456 INFO sqlalchemy.engine.Engine :: COMMIT
-2026-05-15 18:34:21,456 INFO zazatech :: Database initialized — application startup complete
+2026-05-20 17:38:40,974 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+2026-05-20 17:38:40,974 INFO sqlalchemy.engine.Engine :: BEGIN (implicit)
+2026-05-20 17:38:40,975 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("blogs")
+2026-05-20 17:38:40,975 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("blogs")
+2026-05-20 17:38:40,975 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,975 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,977 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("contacts")
+2026-05-20 17:38:40,977 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("contacts")
+2026-05-20 17:38:40,977 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,977 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("projects")
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("projects")
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("services")
+2026-05-20 17:38:40,978 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("services")
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("users")
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("users")
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,979 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,980 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("ambassador_applications")
+2026-05-20 17:38:40,980 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("ambassador_applications")
+2026-05-20 17:38:40,980 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,980 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,981 INFO sqlalchemy.engine.Engine PRAGMA main.table_info("ambassadors")
+2026-05-20 17:38:40,981 INFO sqlalchemy.engine.Engine :: PRAGMA main.table_info("ambassadors")
+2026-05-20 17:38:40,981 INFO sqlalchemy.engine.Engine [raw sql] ()
+2026-05-20 17:38:40,981 INFO sqlalchemy.engine.Engine :: [raw sql] ()
+2026-05-20 17:38:40,982 INFO sqlalchemy.engine.Engine COMMIT
+2026-05-20 17:38:40,982 INFO sqlalchemy.engine.Engine :: COMMIT
+2026-05-20 17:38:40,982 INFO zazatech :: Database initialized — application startup complete
 INFO:     Application startup complete.
-ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] обычно разрешается только одно использование адреса сокета (протокол/сетевой адрес/порт)
-INFO:     Waiting for application shutdown.
-2026-05-15 18:34:21,457 INFO zazatech :: Application shutting down
-INFO:     Application shutdown complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:54433 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54435 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59270 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59271 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:59272 - "GET /docs HTTP/1.1" 200 OK
