@@ -34,6 +34,11 @@ def get_current_user(
     if payload is None:
         raise _credentials_exception
 
+    # Reject refresh tokens used as Bearer creds. Tokens issued before the
+    # type claim existed (`type` missing) are treated as access for compat.
+    if payload.get("type", "access") != "access":
+        raise _credentials_exception
+
     raw_sub = payload.get("sub")
     if raw_sub is None:
         raise _credentials_exception

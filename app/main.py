@@ -32,6 +32,14 @@ from app.routers import (
     services,
     users,
 )
+from app.routers.ambassador_applications import (
+    router as ambassador_applications_router,
+)
+from app.routers.admin_ambassador_applications import (
+    router as admin_ambassador_applications_router,
+)
+from app.routers.ambassadors import router as ambassadors_router
+from app.routers.admin_ambassadors import router as admin_ambassadors_router
 
 logging.basicConfig(
     level=logging.INFO,
@@ -57,7 +65,8 @@ app = FastAPI(
 
 # Middleware. Starlette runs the LAST-added middleware FIRST (outermost),
 # so CORS must be added last to wrap everything (incl. rate-limit 429s).
-app.add_middleware(RateLimitMiddleware)
+if settings.RATE_LIMIT_ENABLED:
+    app.add_middleware(RateLimitMiddleware)
 app.add_middleware(TrailingSlashMiddleware)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(
@@ -85,6 +94,10 @@ app.include_router(projects.router)
 app.include_router(blogs.router)
 app.include_router(contacts.router)
 app.include_router(dashboard.router)
+app.include_router(ambassador_applications_router)
+app.include_router(admin_ambassador_applications_router)
+app.include_router(ambassadors_router)
+app.include_router(admin_ambassadors_router)
 
 
 @app.get("/", tags=["meta"])

@@ -46,4 +46,11 @@ def create_db_and_tables() -> None:
     # Importing the models package registers every table on the metadata.
     from app import models  # noqa: F401
 
+    # Standalone ambassador entities (not in app/models/__init__.py) — import
+    # explicitly so SQLModel.metadata sees their tables before create_all.
+    from app.models.ambassador import Ambassador  # noqa: F401
+    from app.models.ambassador_application import (  # noqa: F401
+        AmbassadorApplication,
+    )
+
     SQLModel.metadata.create_all(engine)

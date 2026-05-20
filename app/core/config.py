@@ -13,10 +13,12 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./zazetech.db"
     JWT_SECRET: str
     JWT_EXPIRE_MINUTES: int = 60
+    JWT_REFRESH_EXPIRE_DAYS: int = 7
     # NoDecode -> pydantic-settings hands us the raw env string instead of
     # trying to JSON-decode it, so we can accept both JSON and CSV forms.
     ALLOWED_ORIGINS: Annotated[list[str], NoDecode] = ["http://localhost:3000"]
     NODE_ENV: str = "development"
+    RATE_LIMIT_ENABLED: bool = True
 
     model_config = SettingsConfigDict(
         env_file=".env",

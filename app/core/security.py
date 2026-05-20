@@ -39,11 +39,20 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 
 def create_access_token(data: dict) -> str:
-    """Sign a JWT from `data`, adding `iat`/`exp` from JWT_EXPIRE_MINUTES."""
+    """Sign a short-lived access JWT (carries `type=access`)."""
     to_encode = data.copy()
     now = datetime.now(timezone.utc)
     expire = now + timedelta(minutes=settings.JWT_EXPIRE_MINUTES)
-    to_encode.update({"iat": now, "exp": expire})
+    to_encode.update({"iat": now, "exp": expire, "type": "access"})
+    return jwt.encode(to_encode, settings.JWT_SECRET, algorithm=ALGORITHM)
+
+
+def create_refresh_token(data: dict) -> str:
+    """Sign a long-lived refresh JWT (carries `type=refresh`)."""
+    to_encode = data.copy()
+    now = datetime.now(timezone.utc)
+    expire = now + timedelta(days=settings.JWT_REFRESH_EXPIRE_DAYS)
+    to_encode.update({"iat": now, "exp": expire, "type": "refresh"})
     return jwt.encode(to_encode, settings.JWT_SECRET, algorithm=ALGORITHM)
 
 

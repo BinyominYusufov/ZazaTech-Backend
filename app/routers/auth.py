@@ -6,16 +6,23 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel
 from sqlmodel import Session, select
 
 from app.core.database import get_session
 from app.core.security import (
     create_access_token,
+    create_refresh_token,
+    decode_token,
     hash_password,
     verify_password,
 )
 from app.dependencies.auth import get_current_user
 from app.models.user import User, UserRegister, UserResponse
+
+
+class RefreshRequest(BaseModel):
+    refresh: str
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -37,10 +44,14 @@ def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    token = create_access_token({"sub": str(user.id), "role": user.role})
+    claims = {"sub": str(user.id), "role": user.role}
+    access = create_access_token(claims)
+    refresh = create_refresh_token({"sub": str(user.id)})
     return {
         "success": True,
-        "token": token,
+        "token": access,
+        "access": access,
+        "refresh": refresh,
         "user": UserResponse.model_validate(user),
     }
 
@@ -70,12 +81,48 @@ def register(
     session.commit()
     session.refresh(user)
 
-    token = create_access_token({"sub": str(user.id), "role": user.role})
+    claims = {"sub": str(user.id), "role": user.role}
+    access = create_access_token(claims)
+    refresh = create_refresh_token({"sub": str(user.id)})
     return {
         "success": True,
-        "token": token,
+        "token": access,
+        "access": access,
+        "refresh": refresh,
         "user": UserResponse.model_validate(user),
     }
+
+
+@router.post("/token/refresh")
+def refresh_token(
+    payload: RefreshRequest,
+    session: Annotated[Session, Depends(get_session)],
+) -> dict:
+    claims = decode_token(payload.refresh)
+    invalid = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or expired refresh token",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    if claims is None or claims.get("type") != "refresh":
+        raise invalid
+
+    raw_sub = claims.get("sub")
+    try:
+        user_id = int(raw_sub) if raw_sub is not None else None
+    except (TypeError, ValueError):
+        raise invalid
+    if user_id is None:
+        raise invalid
+
+    # Re-load the user so the new access token reflects the current role
+    # (and so we 401 immediately if the user was deleted).
+    user = session.get(User, user_id)
+    if user is None:
+        raise invalid
+
+    access = create_access_token({"sub": str(user.id), "role": user.role})
+    return {"success": True, "data": {"access": access}}
 
 
 @router.get("/me")
